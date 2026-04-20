@@ -41,7 +41,7 @@ app.get("/session", async (req, res) => {
         message: "session id required"
     });
     const user = await User.findOne({
-        sessionId: id.split(':')[1]
+        sessionId: id.split('~')[1]
     });
 
     if(!user) return res.json({
@@ -93,10 +93,10 @@ app.get("/pairing", async (req, res) => {
                     let encoded = generateid();
                     const userJid = sparky.user?.id?.replace(/:.*@/, '@');
                     let session = await sparky.sendMessage(userJid, {
-                        text: "A-S-W-I-N-S-P-A-R-K-Y:" + encoded,
+                        text: "KRIZ-BOT-INC~" + encoded,
                     });
                     let text =
-                        "*Thank You for Using X BOT MD*\n\n\nDeveloper Contact: +91 70129 84396\n\nOfficial Channel: https://whatsapp.com/channel/0029Va9ZOf36rsR1Ym7O2x00\n\nIf you encounter any issues or wish to report a problem, please feel free to join our dedicated support group: https://chat.whatsapp.com/I6lxNWSNneILUeqRqCa36S\n\nWe appreciate your feedback and are here to assist you!";
+                        "*Thank You for Using KRIZ-BOT-INC*\n\n\nDeveloper Contact: +91 98471 92542\n\nOfficial Channel: https://whatsapp.com/channel/0029Va9ZOf36rsR1Ym7O2x00\n\nIf you encounter any issues or wish to report a problem, please feel free to join our dedicated support group: https://chat.whatsapp.com/I6lxNWSNneILUeqRqCa36S\n\nWe appreciate your feedback and are here to assist you!";
                     await sparky.sendMessage(
                         userJid,
                         { text },
