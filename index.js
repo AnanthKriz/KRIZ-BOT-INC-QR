@@ -5,7 +5,6 @@ import pino from "pino";
 import fs from "fs-extra";
 import User from "./lib/user.js";
 import generateid from "./lib/id.js";
-import { exec } from "child_process";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import makeWASocket, {
@@ -110,12 +109,10 @@ app.get("/pairing", async (req, res) => {
                     await delay(3000);
                     fs.emptyDirSync(__dirname + "/session");
                     console.log("_Restarting..._");
-                    exec("npm restart", (error) => {
-                        if (error) {
-                            console.log(`Error: ${error}`);
-                        }
-                    });
+                    
+                    // ✅ PM2 will auto-restart after exit
                     process.exit(0);
+                    
                 } else if (
                     connection === "close" &&
                     lastDisconnect?.error?.output?.statusCode !== 401
